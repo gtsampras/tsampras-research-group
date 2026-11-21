@@ -1,0 +1,8 @@
+@article{Lee2024corewall,
+  author  = {Lee, Kyoungyeon and Tsampras, Georgios and Mayorga, C. Franco},
+  title   = {Reinforced concrete core wall buildings with modified friction-based force-limiting connections: Connection design considerations and three-dimensional response to bidirectional ground motions},
+  journal = {Journal of Structural Engineering},
+  year    = {2024},
+  doi     = {10.1061/JSENDH.STENG-13609},
+  keywords = {advisee:Lee; advisee:Mayorga}
+}

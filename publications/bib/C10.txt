@@ -1,0 +1,6 @@
+@inproceedings{Tsampras2020C10,
+  author = {Georgios Tsampras and José I. Restrepo and Richard Sause and Robert B. Fleischman and Zhi Zhang},
+  title = {Floor-diaphragm anchorage system for seismic resistant buildings with enhanced reliability},
+  booktitle = {17th World Conference on Earthquake Engineering, Sendai, Japan},
+  year = {2020}
+}

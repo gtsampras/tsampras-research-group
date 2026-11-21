@@ -1,0 +1,10 @@
+@article{Tsampras2018friction,
+  author  = {Tsampras, Georgios and Sause, Richard and Fleischman, Robert B. and Restrepo, Jos{\'e} I.},
+  title   = {Experimental study of deformable connection consisting of friction device and rubber bearings to connect floor system to lateral force resisting system},
+  journal = {Earthquake Engineering \& Structural Dynamics},
+  year    = {2018},
+  volume  = {47},
+  number  = {4},
+  pages   = {1032--1053},
+  doi     = {10.1002/eqe.3004}
+}

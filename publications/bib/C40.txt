@@ -1,0 +1,6 @@
+@inproceedings{Pick2026C40,
+  author = {Kanoa Pick and Falk Feddersen and Georgios Tsampras},
+  title = {The Effect of Submerged Engineered Reef Structures on Wave Overturn Shape},
+  booktitle = {Ocean Sciences Meeting, Glasgow, Scotland},
+  year = {2026}
+}

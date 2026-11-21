@@ -1,0 +1,7 @@
+@dataset{Tsampras2014fd,
+  author    = {Tsampras, Georgios and Sause, Richard},
+  title     = {Full-scale component tests of inertial force-limiting floor anchorage systems using a friction device and carbon fiber reinforced low damping rubber bearings},
+  publisher = {DesignSafe-CI},
+  year      = {2014},
+  doi       = {10.4231/D3HH6C68B}
+}

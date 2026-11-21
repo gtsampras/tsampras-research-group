@@ -1,0 +1,8 @@
+@article{Mayorga2024uncertainty,
+  author  = {Mayorga, C. Franco and Tsampras, Georgios},
+  title   = {Reinforced concrete wall buildings with force-limiting connections: Modeling effects and uncertainty propagation},
+  journal = {Earthquake Engineering \& Structural Dynamics},
+  year    = {2024},
+  doi     = {10.1002/eqe.4073},
+  keywords = {advisee:Mayorga}
+}

@@ -1,0 +1,6 @@
+@inproceedings{Chen2025C38,
+  author = {Kaixin Chen and Georgios Tsampras},
+  title = {Development and preliminary experimental characterization of a novel friction-based structural connection with predetermined discrete variable friction forces for high-performance earthquake-resistant buildings},
+  booktitle = {19th World Conference on Seismic Isolation, Energy Dissipation and Active Vibration Control of Structures, University of California, Berkeley, CA},
+  year = {2025}
+}

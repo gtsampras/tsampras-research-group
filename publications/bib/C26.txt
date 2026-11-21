@@ -1,0 +1,6 @@
+@inproceedings{Tsampras2024C26,
+  author = {Georgios Tsampras and Kaixin Chen and Dominic Tran and Anne-Sophie Roobol},
+  title = {Friction-based connections: materials},
+  booktitle = {designs, manufacturing, simulations, and experiments, 18th World Conference on Earthquake Engineering, Milan, Italy},
+  year = {2024}
+}

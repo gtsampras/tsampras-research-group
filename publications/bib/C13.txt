@@ -1,0 +1,6 @@
+@inproceedings{Tsampras2022C13,
+  author = {Georgios Tsampras and Richard Sause and Robert B. Fleischman and José I. Restrepo and Arpit Nema and Zhi Zhang},
+  title = {Practical force-limiting deformable connections in buildings with rocking base mechanism and limited higher-mode responses},
+  booktitle = {12th National Conference on Earthquake Engineering, Utah, USA},
+  year = {2022}
+}

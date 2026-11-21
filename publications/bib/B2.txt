@@ -1,0 +1,10 @@
+@incollection{Biondini2024workshop,
+  author    = {Biondini, Fabio and Lounis, Zoubir and Ghosn, Michel and Giovannettone, Jason and Ellingwood, Bruce R. and Frangopol, Dan M. and Wu, Teng and Bocchini, Paolo and Haas, Kyle and Fiorillo, Graziano and Tsampras, Georgios and Papakonstantinou, Kostas G. and Capacci, Luca},
+  title     = {International workshop overview and outcomes},
+  booktitle = {Effects of Climate Change on Life-Cycle Performance of Structures and Infrastructure Systems},
+  publisher = {ASCE},
+  year      = {2024},
+  pages     = {329--348},
+  doi       = {10.1061/9780784485804.app2},
+  note      = {2026 ASCE State-of-the-Art of Civil Engineering Award}
+}

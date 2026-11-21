@@ -1,0 +1,8 @@
+@article{Tsampras2009retrofit,
+  author  = {Tsampras, Georgios},
+  title   = {Retrofit of existing reinforced concrete structures by using steel bracings [in Greek]},
+  journal = {Newsletter of the Hellenic Society of Civil Engineers},
+  year    = {2009},
+  number  = {377},
+  pages   = {46--51}
+}

@@ -1,0 +1,7 @@
+@inproceedings{Tsampras2018C9,
+  author = {Georgios Tsampras and Richard Sause and Robert B. Fleischman and José I. Restrepo and Zhi Zhang and Ulina Shakya and Dichuan Zhang and Joseph Maffei and David Mar},
+  title = {Experimental study of connection between floor system and lateral force resisting system},
+  booktitle = {11th National Conference on Earthquake Engineering, CA, USA},
+  year = {2018},
+  url = {https://11ncee.org/images/program/papers/11NCEE-001206.pdf}
+}

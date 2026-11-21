@@ -1,0 +1,6 @@
+@inproceedings{Chen2024C27,
+  author = {Kaixin Chen and Georgios Tsampras},
+  title = {Experimental characterization of composite materials in friction-based force-limiting connections},
+  booktitle = {18th World Conference on Earthquake Engineering, Milan, Italy},
+  year = {2024}
+}

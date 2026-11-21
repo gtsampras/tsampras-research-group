@@ -1,0 +1,7 @@
+@inproceedings{Lee2024C23,
+  author = {Kyoungyeon Lee and Georgios Tsampras and C. Franco Mayorga and Kaixin Chen},
+  title = {Controlling higher-mode seismic responses in reinforced concrete core wall buildings using force-limiting floor-to-wall connections},
+  booktitle = {Natural Hazards Research Summit 2024, DesignSafe-CI},
+  year = {2024},
+  doi = {10.17603/ds2-q1vy-sb09}
+}

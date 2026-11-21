@@ -1,0 +1,8 @@
+@phdthesis{Tsampras2016phd,
+  author  = {Tsampras, Georgios},
+  title   = {Force-limiting deformable floor diaphragm connection for earthquake resistant buildings},
+  school  = {Lehigh University},
+  type    = {PhD dissertation},
+  year    = {2016},
+  url     = {https://preserve.lehigh.edu/etd/2851}
+}

@@ -1,0 +1,6 @@
+@inproceedings{Mayorga2022C12,
+  author = {C. Franco Mayorga and Kyoungyeon Lee and Georgios Tsampras},
+  title = {Effect of the structural wall modeling in the seismic response of buildings with force-limiting connections between diaphragm-to-wall joints},
+  booktitle = {Engineering Mechanics Institute Conference, Baltimore, Maryland, USA},
+  year = {2022}
+}

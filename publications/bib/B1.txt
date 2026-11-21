@@ -1,0 +1,10 @@
+@incollection{Ellingwood2024impact,
+  author    = {Ellingwood, Bruce R. and Bocchini, Paolo and Lounis, Zoubir and Ghosn, Michel and Liu, Ming and Yang, David and Capacci, Luca and Diniz, Sofia and Lin, Ning and Tsiatas, George and Biondini, Fabio and van de Lindt, John and Frangopol, Dan M. and Akiyama, Mitsuyoshi and Li, Yue and Barbato, Michele and Hong, Hanping and McAllister, Therese and Tsampras, Georgios and Vahedifard, Farshid},
+  title     = {Impact of climate change on infrastructure performance},
+  booktitle = {Effects of Climate Change on Life-Cycle Performance of Structures and Infrastructure Systems},
+  publisher = {ASCE},
+  year      = {2024},
+  pages     = {115--206},
+  doi       = {10.1061/9780784485804.ch3},
+  note      = {2026 ASCE State-of-the-Art of Civil Engineering Award}
+}

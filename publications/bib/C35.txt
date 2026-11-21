@@ -1,0 +1,6 @@
+@inproceedings{Deng2025C35,
+  author = {Xianjue Deng and P. Benson Shing and Ahmed Elgamal and Georgios Tsampras},
+  title = {Nonlinear Dynamic Soil-structure Interaction Analysis of Reinforced Concrete Tunnel Linings},
+  booktitle = {ASCE Engineering Mechanics Institute Conference, Anaheim, CA, USA},
+  year = {2025}
+}

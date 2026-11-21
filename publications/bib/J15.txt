@@ -1,0 +1,7 @@
+@article{Chou2025slidingslab,
+  author  = {Chou, Chung-Che and Wu, Chi-Jeng and Hwang, Li-Yu and Cordova, Alvaro and Li, Huang-Zuo and Chao, Shu-Hsien and Tsampras, Georgios and Uang, Chia-Ming and Chao, Shih-Ho and Chung, Hsin-Yang},
+  title   = {Shaking table tests of a three-story re-centering steel braced frame with sliding slab connected to energy dissipation devices},
+  journal = {Earthquake Engineering \& Structural Dynamics},
+  year    = {2025},
+  doi     = {10.1002/eqe.70053}
+}

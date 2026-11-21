@@ -1,0 +1,6 @@
+@inproceedings{Pick2026C41,
+  author = {Kanoa Pick and Falk Feddersen and Georgios Tsampras},
+  title = {Effect of reef structures on wave breaking and overturning parameters},
+  booktitle = {39th International Conference on Coastal Engineering, Galveston, TX, USA},
+  year = {2026}
+}

@@ -1,0 +1,6 @@
+@inproceedings{Mayorga2024C29,
+  author = {C. Franco Mayorga and Georgios Tsampras},
+  title = {Structural Assessment of alternative seismic design provisions for diaphragms per ASCE/SEI 7-22},
+  booktitle = {18th World Conference on Earthquake Engineering, Milan, Italy},
+  year = {2024}
+}

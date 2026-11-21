@@ -1,0 +1,6 @@
+@inproceedings{Mayorga2024C24,
+  author = {C. Franco Mayorga and Georgios Tsampras},
+  title = {Effect of uncertainty in RC wall steel model parameters on the seismic responses of buildings with force-limiting connections},
+  booktitle = {18th World Conference on Earthquake Engineering, Milan, Italy},
+  year = {2024}
+}

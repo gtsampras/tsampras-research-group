@@ -1,0 +1,6 @@
+@inproceedings{Fleischman2015C4,
+  author = {Robert B. Fleischman and José I. Restrepo and Arpit Nema and Dichuan Zhang and Ulina Shakya and Zhi Zhang and Richard Sause and Georgios Tsampras and Giorgio Monti},
+  title = {Inertial force-limiting anchorage system for seismic resistant building structures},
+  booktitle = {ASCE Structures Congress 2015, Portland, OR, USA, 1302–1313},
+  year = {2015}
+}

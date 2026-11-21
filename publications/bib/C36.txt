@@ -1,0 +1,6 @@
+@inproceedings{Mursel2025C36,
+  author = {Sena Mursel and C. Franco Mayorga and Georgios Tsampras and Paolo Bocchini},
+  title = {Resilience-based design of buildings with accelerated post-earthquake functional recovery},
+  booktitle = {14th International Conference on Structural Safety and Reliability, University of Southern California, Los Angeles, CA},
+  year = {2025}
+}

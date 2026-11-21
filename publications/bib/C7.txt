@@ -1,0 +1,6 @@
+@inproceedings{Tsampras2017C7,
+  author = {Georgios Tsampras and Richard Sause and Robert B. Fleischman and José I. Restrepo and Dichuan Zhang and Zhi Zhang},
+  title = {Experimental study of deformable connection between floor system and lateral force resisting system for earthquake-resistant buildings},
+  booktitle = {ASCE Structures Congress 2017, Denver, CO, USA},
+  year = {2017}
+}

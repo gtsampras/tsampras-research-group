@@ -1,0 +1,6 @@
+@inproceedings{Chen2022C17,
+  author = {Kaixin Chen and Georgios Tsampras and Kyoungyeon Lee and C. Franco Mayorga},
+  title = {Reusable force-limiting connection with variable friction force for high-performance buildings},
+  booktitle = {8th Asia Conference on Earthquake Engineering, Taipei, Taiwan},
+  year = {2022}
+}

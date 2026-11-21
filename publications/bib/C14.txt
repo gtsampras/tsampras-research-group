@@ -1,0 +1,6 @@
+@inproceedings{Tsampras2022C14,
+  author = {Georgios Tsampras and Kaixin Chen and Kyoungyeon Lee},
+  title = {Friction-based force-limiting connections for earthquake-resistant buildings},
+  booktitle = {13th International Congress on Mechanics, The Hellenic Society for Theoretical and Applied Mechanics, Patras, Greece},
+  year = {2022}
+}

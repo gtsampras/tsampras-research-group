@@ -1,0 +1,6 @@
+@inproceedings{Tsampras2015C5,
+  author = {Georgios Tsampras and Richard Sause and Robert B. Fleischman and José I. Restrepo and Joseph Maffei and David Mar},
+  title = {Experimental validation of an earthquake-resistant building system to control floor accelerations},
+  booktitle = {ASCE Structures Congress 2015, Portland, OR, USA},
+  year = {2015}
+}

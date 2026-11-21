@@ -1,0 +1,10 @@
+@article{Zhang2018shaketable,
+  author  = {Zhang, Zhi and Fleischman, Robert B. and Restrepo, Jos{\'e} I. and Guerrini, Gabrielle and Nema, Arpit and Zhang, Dichuan and Shakya, Ulina and Tsampras, Georgios and Sause, Richard},
+  title   = {Shake-table test performance of an inertial force-limiting floor anchorage system},
+  journal = {Earthquake Engineering \& Structural Dynamics},
+  year    = {2018},
+  volume  = {47},
+  number  = {10},
+  pages   = {1987--2011},
+  doi     = {10.1002/eqe.3047}
+}

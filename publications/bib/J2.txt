@@ -1,0 +1,10 @@
+@article{Tsampras2016development,
+  author  = {Tsampras, Georgios and Sause, Richard and Zhang, Dichuan and Fleischman, Robert B. and Restrepo, Jos{\'e} I. and Mar, David and Maffei, Joseph},
+  title   = {Development of deformable connection for earthquake-resistant buildings to reduce floor accelerations and force responses},
+  journal = {Earthquake Engineering \& Structural Dynamics},
+  year    = {2016},
+  volume  = {45},
+  number  = {9},
+  pages   = {1473--1494},
+  doi     = {10.1002/eqe.2718}
+}

@@ -1,0 +1,11 @@
+@article{Chen2023discrete,
+  author  = {Chen, Kaixin and Tsampras, Georgios and Lee, Kyoungyeon},
+  title   = {Structural connection with predetermined discrete variable friction forces},
+  journal = {Resilient Cities and Structures},
+  year    = {2023},
+  volume  = {2},
+  number  = {1},
+  pages   = {1--17},
+  doi     = {10.1016/j.rcns.2023.02.006},
+  keywords = {advisee:Chen; advisee:Lee}
+}

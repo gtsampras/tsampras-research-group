@@ -1,0 +1,6 @@
+@inproceedings{Tsampras2025C34,
+  author = {Georgios Tsampras},
+  title = {Friction-based force-limiting connections},
+  booktitle = {PEER Annual Meeting, UC Berkeley, USA (paper)},
+  year = {2025}
+}

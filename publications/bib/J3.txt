@@ -1,0 +1,10 @@
+@article{Tsampras2017brb,
+  author  = {Tsampras, Georgios and Sause, Richard and Fleischman, Robert B. and Restrepo, Jos{\'e} I.},
+  title   = {Experimental study of deformable connection consisting of buckling-restrained brace and rubber bearings to connect floor system to lateral force resisting system},
+  journal = {Earthquake Engineering \& Structural Dynamics},
+  year    = {2017},
+  volume  = {46},
+  number  = {8},
+  pages   = {1287--1305},
+  doi     = {10.1002/eqe.2856}
+}

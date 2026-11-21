@@ -1,0 +1,6 @@
+@inproceedings{Mayorga2024C32,
+  author = {C. Franco Mayorga and Georgios Tsampras and Paolo Bocchini and Sena Mursel},
+  title = {Overview of a project on resilience-based design of buildings with accelerated post-earthquake functional recovery},
+  booktitle = {18th U.S.-Japan-New Zealand Workshop on the Improvement of Structural Engineering and Resilience, Applied Technology Council, San Diego},
+  year = {2024}
+}

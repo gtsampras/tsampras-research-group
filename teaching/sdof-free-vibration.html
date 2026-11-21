@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SDOF Response</title>
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<script defer src="vendor/katex/katex.min.js"></script>
+<script defer src="vendor/katex/contrib-auto-render.min.js"></script>
+<!--
+  Interactive SDOF demo (Teaching page), black-on-white textbook style with Computer Modern (KaTeX) type.
+  Four cases: free vibration, and base excitation by a harmonic, a pulse or an earthquake ground acceleration.
+    Free vibration:   m u'' + c u' + k u = 0           (closed-form solution, as in the original GlowScript demo)
+    Base excitation:  m u'' + c u' + k u = -m ug''(t)  (u: displacement relative to the ground; solved per unit mass,
+                      u'' + 2 zeta wn u' + wn^2 u = -ug'', with Newmark's average-acceleration method, at least 100 steps per period)
+  Plots: response divided by its peak absolute value (peak shown above each plot); horizontal axis t/Tn (earthquake: t in s).
+  For base excitation the third plot is the total acceleration u''t = u'' + ug'', with the ground acceleration in grey (same scale).
+  Run computes the whole response and plays it once; pressing Run again starts over from t = 0.
+  Playback: real time when Tn is between 0.5 and 1.5 s (earthquake: when the record is 20 s or shorter); otherwise sped up or slowed down.
+  Earthquake records are in sdof-records.js (loaded only when the Earthquake case is opened). KaTeX (MIT licence) is in vendor/katex.
+  The original GlowScript (VPython) demo from the previous website is kept as sdof-free-vibration-glowscript.html.
+-->
+<style>
+  :root { --ink:#111; --grey:#8a8a8a; --faint:#d6d6d6; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; background:#fff; color:var(--ink);
+    font-family: KaTeX_Main, "Latin Modern Roman", "Computer Modern Serif", "Times New Roman", serif; font-size:17px; }
+  .wrap { padding: 4px 2px 10px; }
+  .head { display:flex; align-items:baseline; justify-content:space-between; gap:12px 20px; flex-wrap:wrap; margin-bottom:10px; }
+  h1 { margin:0; font-size:1.3rem; font-weight:400; }
+  .eom { font-size:1.05rem; }
+  button { font:inherit; font-size:.95rem; padding:.22rem .95rem; cursor:pointer; min-width:84px;
+    border:1px solid var(--ink); background:#fff; color:var(--ink); border-radius:2px; }
+  button:hover { background:#f2f2f2; }
+  button.primary { background:var(--ink); color:#fff; }
+  button.primary:hover { background:#333; }
+  button:focus-visible, input[type=range]:focus-visible, select:focus-visible { outline:2px solid #111; outline-offset:2px; }
+  .modes { display:flex; flex-wrap:wrap; gap:0; margin:0 0 12px; border-bottom:1px solid var(--faint); }
+  .modes button { border:0; border-bottom:2px solid transparent; border-radius:0; min-width:0; padding:.25rem .9rem .35rem; background:none; color:#555; }
+  .modes button:hover { background:none; color:var(--ink); }
+  .modes button[aria-selected="true"] { color:var(--ink); border-bottom-color:var(--ink); }
+  .main { display:grid; grid-template-columns: minmax(0,1.7fr) minmax(250px,1fr); gap:22px; align-items:start; }
+  .stage { position:relative; border-top:1px solid var(--faint); border-bottom:1px solid var(--faint); }
+  .stage canvas { display:block; width:100%; height:250px; touch-action:none; }
+  .stage canvas.can-drag { cursor:grab; }
+  .stage canvas.dragging { cursor:grabbing; }
+  .hint { margin:4px 0 0 2px; font-size:.82rem; font-style:italic; color:var(--grey); }
+  .readout { position:absolute; right:8px; top:8px; text-align:right; font-size:.95rem; line-height:1.45; pointer-events:none; }
+  .mi { font-family: KaTeX_Math, serif; font-style: italic; }
+  .readout sub, .pk sub { font-size:.72em; }
+  .controls { display:grid; gap:12px; }
+  .ctl[hidden] { display:none; }
+  .ctl label, .ctl .lab { display:block; font-size:.98rem; margin-bottom:0; }
+  .ctl .row { display:flex; align-items:center; gap:12px; }
+  .ctl output { min-width:104px; text-align:right; font-variant-numeric: tabular-nums; font-size:.98rem; }
+  .ctl output small { font-size:.85em; margin-left:4px; color:#444; }
+  .ctl .sub { font-size:.9rem; color:#444; margin-top:2px; }
+  .seg { display:flex; gap:0; margin-top:4px; }
+  .seg button { min-width:0; font-size:.9rem; padding:.15rem .8rem; border-radius:0; }
+  .seg button + button { border-left:0; }
+  .seg button[aria-pressed="true"] { background:var(--ink); color:#fff; }
+  select { font:inherit; font-size:.95rem; padding:.2rem .4rem; border:1px solid var(--ink); border-radius:2px; background:#fff; width:100%; margin-top:4px; }
+  input[type=range] { flex:1; -webkit-appearance:none; appearance:none; background:transparent; height:22px; margin:0; }
+  input[type=range]::-webkit-slider-runnable-track { height:1px; background:var(--ink); }
+  input[type=range]::-moz-range-track { height:1px; background:var(--ink); }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:13px; height:13px; margin-top:-6px; border-radius:50%; background:#fff; border:1.5px solid var(--ink); }
+  input[type=range]::-moz-range-thumb { width:11px; height:11px; border-radius:50%; background:#fff; border:1.5px solid var(--ink); }
+  .plots { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px; margin-top:16px; }
+  .plot .t { font-size:.98rem; display:flex; justify-content:space-between; align-items:baseline; gap:8px; flex-wrap:wrap; margin:0 0 2px 8px; }
+  .plot .pk { font-size:.9rem; color:#333; font-variant-numeric: tabular-nums; }
+  .plot canvas { display:block; width:100%; height:190px; }
+  /* labels that differ between free vibration and base excitation */
+  body.base .free-only, body:not(.base) .base-only { display:none; }
+  @media (max-width: 760px) { .main { grid-template-columns: 1fr; } .plots { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <h1>Response of an SDOF system</h1>
+    <div class="eom"><span class="free-only">\(m\ddot{u} + c\dot{u} + k\,u = 0\)</span><span class="base-only">\(m\ddot{u} + c\dot{u} + k\,u = -m\,\ddot{u}_g(t)\)</span></div>
+    <button id="runBtn" type="button" class="primary">Run</button>
+  </div>
+
+  <div class="modes" role="tablist" aria-label="Type of excitation">
+    <button type="button" role="tab" data-mode="free" aria-selected="true">Free vibration</button>
+    <button type="button" role="tab" data-mode="harmonic" aria-selected="false">Harmonic</button>
+    <button type="button" role="tab" data-mode="pulse" aria-selected="false">Pulse</button>
+    <button type="button" role="tab" data-mode="eq" aria-selected="false">Earthquake</button>
+  </div>
+
+  <div class="main">
+    <div>
+    <div class="stage">
+      <canvas id="stage" aria-label="Animation of a spring-mass-dashpot system"></canvas>
+      <div class="readout" id="readout"></div>
+    </div>
+    <div class="hint" id="hint">&nbsp;</div>
+    </div>
+    <div class="controls">
+      <div class="ctl"><label for="slm">Weight of the mass, \(w\)</label>
+        <div class="row"><input id="slm" type="range"><output id="wtm"></output></div></div>
+      <div class="ctl"><label for="slk">Stiffness of the spring, \(k\)</label>
+        <div class="row"><input id="slk" type="range"><output id="wtk"></output></div></div>
+      <div class="ctl" data-modes="free"><label for="sldispo">Initial displacement, \(u_0\)</label>
+        <div class="row"><input id="sldispo" type="range"><output id="wtdispo"></output></div></div>
+      <div class="ctl" data-modes="free"><label for="slvelo">Initial velocity, \(\dot{u}_0\)</label>
+        <div class="row"><input id="slvelo" type="range"><output id="wtvelo"></output></div></div>
+      <div class="ctl"><label for="slz">Damping ratio, \(\zeta\)</label>
+        <div class="row"><input id="slz" type="range"><output id="wtz"></output></div>
+        <div class="sub" id="wtc"></div></div>
+      <div class="ctl" data-modes="pulse" hidden><span class="lab">Pulse shape</span>
+        <div class="seg" id="shape"><button type="button" data-shape="sine" aria-pressed="true">Half-sine</button><button type="button" data-shape="rect" aria-pressed="false">Rectangular</button></div></div>
+      <div class="ctl" data-modes="harmonic" hidden><label for="slr">Frequency ratio, \(\omega/\omega_n\)</label>
+        <div class="row"><input id="slr" type="range"><output id="wtr"></output></div></div>
+      <div class="ctl" data-modes="pulse" hidden><label for="sltd">Pulse duration, \(t_d/T_n\)</label>
+        <div class="row"><input id="sltd" type="range"><output id="wttd"></output></div></div>
+      <div class="ctl" data-modes="harmonic pulse" hidden><label for="sla">Peak ground acceleration, \(\ddot{u}_{g0}\)</label>
+        <div class="row"><input id="sla" type="range"><output id="wta"></output></div></div>
+      <div class="ctl" data-modes="eq" hidden><label for="rec">Ground motion</label>
+        <select id="rec"></select>
+        <div class="sub" id="recinfo"></div></div>
+    </div>
+  </div>
+
+  <div class="plots">
+    <div class="plot"><div class="t"><span>Displacement \(u/u_{\max}\)</span><span class="pk" id="pku"></span></div><canvas id="pu" aria-label="Normalized displacement time history"></canvas></div>
+    <div class="plot"><div class="t"><span>Velocity \(\dot{u}/\dot{u}_{\max}\)</span><span class="pk" id="pkv"></span></div><canvas id="pv" aria-label="Normalized velocity time history"></canvas></div>
+    <div class="plot"><div class="t"><span class="free-only">Acceleration \(\ddot{u}/\ddot{u}_{\max}\)</span><span class="base-only">Total acceleration \(\ddot{u}^t/\ddot{u}^t_{\max}\)</span><span class="pk" id="pka"></span></div><canvas id="pa" aria-label="Normalized acceleration time history"></canvas></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var INK = "#111", GREY = "#8a8a8a", FAINT = "#d6d6d6";
+  var MATH = "KaTeX_Math, 'Latin Modern Math', serif", MAIN = "KaTeX_Main, 'Latin Modern Roman', serif";
+  var G = 386.089;                       // in/s^2 per g
+
+  // Typeset the static labels with KaTeX once it has loaded.
+  window.addEventListener("load", function () {
+    if (window.renderMathInElement) renderMathInElement(document.body, { delimiters: [{ left: "\\(", right: "\\)", display: false }], throwOnError: false });
+    postHeight();
+  });
+
+  // ---- Controls (mass, stiffness and damping ranges as in the original demo) ----
+  var K0 = 1e5, M0 = 1e3;
+  var NPER = 10;                         // natural periods shown for free vibration, harmonic and pulse
+  var $ = function (id) { return document.getElementById(id); };
+  var slm = $("slm"), slk = $("slk"), sldispo = $("sldispo"), slvelo = $("slvelo"), slz = $("slz"),
+      slr = $("slr"), sltd = $("sltd"), sla = $("sla"), rec = $("rec");
+  function setup(sl, min, max, step, val) { sl.min = min; sl.max = max; sl.step = step; sl.value = val; }
+  setup(slm, 0.1 * M0, 5 * M0, 0.1 * M0, M0);
+  setup(slk, 0.1 * K0, 5 * K0, 0.1 * K0, K0);
+  setup(sldispo, 0, 10, 1, 1);
+  setup(slvelo, 0, 10, 1, 0);
+  setup(slz, 0, 100, 0.5, 0);            // damping ratio 0-100 % (up to critical damping)
+  setup(slr, 0.1, 3, 0.05, 0.8);         // forcing frequency / natural frequency
+  setup(sltd, 0.1, 3, 0.05, 0.5);        // pulse duration / natural period
+  setup(sla, 0.05, 1, 0.05, 0.2);        // peak ground acceleration [g]
+  var mode = "free", shape = "sine";
+
+  function fmt(x) { return Number(x).toFixed(2); }
+  function showValues() {
+    $("wtm").innerHTML = fmt(slm.value) + "<small>lbf</small>";
+    $("wtk").innerHTML = fmt(slk.value) + "<small>lbf/in</small>";
+    $("wtdispo").innerHTML = fmt(sldispo.value) + "<small>in</small>";
+    $("wtvelo").innerHTML = fmt(slvelo.value) + "<small>in/s</small>";
+    $("wtz").innerHTML = (+slz.value).toFixed(1) + "<small>%</small>";
+    $("wtr").innerHTML = fmt(slr.value);
+    $("wttd").innerHTML = fmt(sltd.value);
+    $("wta").innerHTML = fmt(sla.value) + "<small>g</small>";
+    var c = 2 * (slz.value / 100) * Math.sqrt(slk.value * slm.value);
+    $("wtc").innerHTML = 'Damping coefficient <span class="mi">c</span> = ' + c.toFixed(2) + " lbf·s/in";
+  }
+  // Changing a parameter clears the last run and shows the new initial state.
+  [slm, slk, sldispo, slvelo, slz, slr, sltd, sla].forEach(function (s) { s.addEventListener("input", function () { showValues(); clearRun(); }); });
+  showValues();
+
+  $("shape").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    shape = b.dataset.shape;
+    this.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    clearRun();
+  });
+
+  // ---- Earthquake records (sdof-records.js, loaded the first time the Earthquake case is opened) ----
+  var RECORDS = null;
+  function loadRecords(done) {
+    if (RECORDS) return done();
+    var s = document.createElement("script"); s.src = "sdof-records.js";
+    s.onload = function () {
+      RECORDS = window.SDOF_RECORDS || {};
+      rec.innerHTML = Object.keys(RECORDS).map(function (k) { return '<option value="' + k + '">' + RECORDS[k].name + "</option>"; }).join("");
+      recInfo(); done();
+    };
+    document.head.appendChild(s);
+  }
+  function recInfo() {
+    var r = RECORDS && RECORDS[rec.value]; if (!r) return;
+    var pga = r.a.reduce(function (m, x) { return Math.max(m, Math.abs(x)); }, 0);
+    $("recinfo").innerHTML = "M " + r.M + " · " + r.station + "<br>" + (r.sf === 1 ? "As recorded" : "Scaled by " + r.sf) + " · PGA " + pga.toFixed(2) + " g · " +
+      Math.round((r.a.length - 1) * r.dt) + " s";
+  }
+  rec.addEventListener("change", function () { recInfo(); clearRun(); });
+
+  // ---- Case tabs ----
+  document.querySelector(".modes").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-mode]"); if (!b) return;
+    var m = b.dataset.mode;
+    var go = function () { applyMode(m); clearRun(); postHeight(); };
+    if (m === "eq") loadRecords(go); else go();
+  });
+  // Show only the controls and labels that belong to the selected case.
+  function applyMode(m) {
+    mode = m;
+    document.querySelectorAll(".modes button").forEach(function (x) { x.setAttribute("aria-selected", x.dataset.mode === mode ? "true" : "false"); });
+    document.querySelectorAll(".ctl[data-modes]").forEach(function (c) { c.hidden = c.dataset.modes.split(" ").indexOf(mode) < 0; });
+    document.body.classList.toggle("base", mode !== "free");
+    stage.classList.toggle("can-drag", mode === "free");
+  }
+
+  // ---- Model ----
+  function params() {
+    var K = +slk.value, M = +slm.value, z = +slz.value / 100, wn = Math.sqrt(K / M);
+    return { uo: +sldispo.value, vo: +slvelo.value, z: z, wn: wn, wd: z < 1 ? wn * Math.sqrt(1 - z * z) : NaN, Tn: 2 * Math.PI / wn };
+  }
+  function freeResponse(p, time) {      // closed form, underdamped or critically damped
+    var u, v, uo = p.uo, vo = p.vo, z = p.z, wn = p.wn, wd = p.wd;
+    if (z < 1) {
+      var ex = Math.exp(-z * wn * time), B = (vo + z * wn * uo) / wd, cs = Math.cos(wd * time), sn = Math.sin(wd * time);
+      u = ex * (uo * cs + B * sn);
+      v = ex * (-z * wn * (uo * cs + B * sn) + (-uo * wd * sn + B * wd * cs));
+    } else {
+      var ex1 = Math.exp(-wn * time), Bc = vo + wn * uo;
+      u = ex1 * (uo + Bc * time); v = ex1 * (Bc - wn * (uo + Bc * time));
+    }
+    return { u: u, v: v, a: -(2 * z * wn * v + wn * wn * u) };
+  }
+  // Ground acceleration ug''(t) in in/s^2 for the harmonic and pulse cases
+  function groundFn(p) {
+    var a0 = +sla.value * G;
+    if (mode === "harmonic") { var w = +slr.value * p.wn; return function (t) { return a0 * Math.sin(w * t); }; }
+    var td = +sltd.value * p.Tn;
+    return shape === "rect" ? function (t) { return t <= td ? a0 : 0; } : function (t) { return t <= td ? a0 * Math.sin(Math.PI * t / td) : 0; };
+  }
+  // Newmark average-acceleration integration of u'' + 2 zeta wn u' + wn^2 u = -ag(t), from rest.
+  // ag: ground acceleration samples at spacing dt; nsub sub-steps per sample (ground acceleration interpolated linearly).
+  function integrate(p, ag, dt, nsub) {
+    var h = dt / nsub, c = 2 * p.z * p.wn, k = p.wn * p.wn;
+    var kh = k + 2 * c / h + 4 / (h * h), A = 4 / h + 2 * c, B = 2;
+    var u = 0, v = 0, a = -ag[0], P = -ag[0];
+    var out = { u: [0], v: [0], a: [a + ag[0]] };   // a: relative acceleration; stored: total acceleration a + ag
+    for (var i = 1; i < ag.length; i++) {
+      for (var s = 1; s <= nsub; s++) {
+        var Pn = -(ag[i - 1] + (ag[i] - ag[i - 1]) * s / nsub), dP = Pn - P;
+        var du = (dP + A * v + B * a) / kh;
+        var dv = 2 * du / h - 2 * v, da = 4 * du / (h * h) - 4 * v / h - 2 * a;
+        u += du; v += dv; a += da; P = Pn;
+      }
+      out.u.push(u); out.v.push(v); out.a.push(a + ag[i]);
+    }
+    return out;
+  }
+
+  // ---- A run: the whole response, computed when Run is pressed and played once ----
+  var run = null, prog = 0, playing = false, drag = false, cur = { u: 1, ag: 0 };
+  function clearRun() {
+    run = null; playing = false; prog = 0; cur = { u: mode === "free" ? +sldispo.value : 0, ag: 0 };
+    ["pku", "pkv", "pka"].forEach(function (id) { $(id).innerHTML = ""; });
+  }
+  function startRun() {
+    if (mode === "eq" && !RECORDS) return;
+    var p = params(), r = { p: p, mode: mode, x: [], u: [], v: [], a: [], ag: null, pk: {}, ipk: {} };
+    if (mode === "free") {
+      var n = NPER * 200;
+      for (var i = 0; i <= n; i++) { var tt = NPER * i / n, f = freeResponse(p, tt * p.Tn); r.x.push(tt); r.u.push(f.u); r.v.push(f.v); r.a.push(f.a); }
+      r.xmax = NPER; r.play = NPER * Math.min(1.5, Math.max(0.5, p.Tn)); r.real = NPER * p.Tn;
+    } else {
+      var ag, dt, nsub;
+      if (mode === "eq") {
+        var R = RECORDS[rec.value]; dt = R.dt; ag = R.a.map(function (x) { return x * G; });
+        nsub = Math.max(1, Math.ceil(dt / (p.Tn / 100)));
+        for (var j = 0; j < ag.length; j++) r.x.push(j * dt);
+        r.xmax = (ag.length - 1) * dt; r.real = r.xmax; r.play = Math.min(r.xmax, 20);
+      } else {
+        var g = groundFn(p), m = NPER * 200; dt = NPER * p.Tn / m; nsub = 1; ag = [];
+        for (var q = 0; q <= m; q++) { ag.push(g(q * dt)); r.x.push(NPER * q / m); }
+        r.xmax = NPER; r.real = NPER * p.Tn; r.play = NPER * Math.min(1.5, Math.max(0.5, p.Tn));
+      }
+      var o = integrate(p, ag, dt, nsub);
+      r.u = o.u; r.v = o.v; r.a = o.a; r.ag = ag;
+    }
+    ["u", "v", "a"].forEach(function (k) {
+      var mx = 0, im = 0;
+      r[k].forEach(function (y, i) { if (Math.abs(y) > mx) { mx = Math.abs(y); im = i; } });
+      r.pk[k] = mx; r.ipk[k] = im;
+    });
+    run = r; prog = 0; playing = true;
+    $("pku").innerHTML = '<span class="mi">u</span><sub>max</sub> = ' + num(r.pk.u) + " in";
+    $("pkv").innerHTML = '<span class="mi">u̇</span><sub>max</sub> = ' + num(r.pk.v) + " in/s";
+    $("pka").innerHTML = mode === "free"
+      ? '<span class="mi">ü</span><sub>max</sub> = ' + num(r.pk.a) + " in/s²"
+      : '<span class="mi">ü</span><sup>t</sup><sub>max</sub> = ' + (r.pk.a / G).toFixed(2) + " g";
+  }
+  function num(x) { return x >= 1000 ? Math.round(x).toLocaleString("en-US") : x >= 100 ? x.toFixed(1) : x.toFixed(2); }
+  $("runBtn").addEventListener("click", startRun);
+
+  // ---- Canvas helpers (crisp on high-resolution screens) ----
+  function fit(c) {
+    var r = c.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    var w = Math.max(1, Math.round(r.width * d)), h = Math.max(1, Math.round(r.height * d));
+    if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+    var g = c.getContext("2d"); g.setTransform(d, 0, 0, d, 0, 0);
+    return { g: g, w: r.width, h: r.height };
+  }
+  function line(g, x1, y1, x2, y2) { g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.stroke(); }
+  // Math label: italic symbol with optional subscript, e.g. mathText(g, "u", "0", x, y, 16)
+  function mathText(g, sym, sub, x, y, size, align) {
+    var subFont = function () { g.font = (/^[0-9]$/.test(sub) ? "" : "italic ") + Math.round(size * 0.7) + "px " + (/^[0-9]$/.test(sub) ? MAIN : MATH); };
+    g.font = "italic " + size + "px " + MATH;
+    var w1 = g.measureText(sym).width, ws = 0;
+    if (sub) { subFont(); ws = g.measureText(sub).width; }
+    var x0 = align === "center" ? x - (w1 + ws) / 2 : align === "right" ? x - w1 - ws : x;
+    g.textAlign = "left"; g.font = "italic " + size + "px " + MATH; g.fillText(sym, x0, y);
+    if (sub) { subFont(); g.fillText(sub, x0 + w1 + 1, y + size * 0.25); }
+    return w1 + ws;
+  }
+  function arrowHead(g, x, y, dir, len, half) {   // dir: angle of the arrow in radians
+    g.beginPath(); g.moveTo(x, y);
+    g.lineTo(x - len * Math.cos(dir) + half * Math.sin(dir), y - len * Math.sin(dir) - half * Math.cos(dir));
+    g.lineTo(x - len * Math.cos(dir) - half * Math.sin(dir), y - len * Math.sin(dir) + half * Math.cos(dir));
+    g.closePath(); g.fill();
+  }
+  function hatch(g, x1, y1, x2, y2, side, step, len) {   // short 45 degree ticks along a line, on one side
+    var L = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / L, uy = (y2 - y1) / L, nx = -uy * side, ny = ux * side;
+    for (var s = step / 2; s < L; s += step) {
+      var px = x1 + ux * s, py = y1 + uy * s;
+      line(g, px, py, px + (nx - ux) * len * 0.7071, py + (ny - uy) * len * 0.7071);
+    }
+  }
+  // "u(t)" style label: italic symbol, optional dots above (1 or 2), optional subscript, then "(t)"
+  function funcLabel(g, sym, sub, x, y, size) {
+    var w = mathText(g, sym, sub, x, y, size, "left");
+    g.font = size + "px " + MAIN; g.fillText("(", x + w + 1, y);
+    var wp = g.measureText("(").width; var wt = mathText(g, "t", "", x + w + 1 + wp, y, size, "left");
+    g.font = size + "px " + MAIN; g.fillText(")", x + w + 2 + wp + wt, y);
+  }
+
+  // ---- Stage: wall, spring, dashpot and square mass on rollers ----
+  var stage = $("stage"), RANGE = 14;   // inches shown on each side of equilibrium
+  applyMode("free");                     // start in Free vibration with only its controls showing
+  var geo = {};
+  function drawStage() {
+    var s = fit(stage), g = s.g, W = s.w, H = s.h;
+    g.clearRect(0, 0, W, H);
+    g.lineCap = "round"; g.lineJoin = "round";
+    var groundY = H - 52, wallX = 44, wallTop = 22;
+    var x0 = wallX + (W - wallX) * 0.52;                 // equilibrium position
+    var scale = Math.min((W - wallX - 70) * 0.48, W - x0 - 60) / RANGE;   // px per inch
+    var p = run ? run.p : params();
+    // the drawing scale shrinks for runs whose peak displacement exceeds the range
+    var dispScale = run && run.pk.u > RANGE ? RANGE / run.pk.u : 1;
+    var M = +slm.value, K = +slk.value, zeta = +slz.value / 100;
+    var mf = Math.sqrt((M - 0.1 * M0) / (4.9 * M0));
+    var bh = 88 + 22 * mf, bw = bh, rr = 5;              // square block that grows with mass; rr: roller radius
+    var xc = x0 + cur.u * dispScale * scale;
+    geo = { x0: x0, scale: scale };
+
+    g.strokeStyle = INK; g.fillStyle = INK;
+    g.lineWidth = 1.4; line(g, wallX, groundY, W - 6, groundY); line(g, wallX, wallTop, wallX, groundY);
+    g.lineWidth = 0.9; hatch(g, wallX, groundY, W - 6, groundY, 1, 10, 9); hatch(g, wallX, wallTop, wallX, groundY, 1, 10, 9);
+
+    // equilibrium reference
+    g.setLineDash([4, 4]); g.strokeStyle = GREY; g.lineWidth = 0.9;
+    line(g, x0, wallTop + 10, x0, groundY); g.setLineDash([]);
+    g.fillStyle = GREY; mathText(g, "u", "", x0 - 14, wallTop + 4, 15, "left"); g.font = "15px " + MAIN; g.textAlign = "left"; g.fillText("= 0", x0 - 4, wallTop + 4);
+
+    // displacement arrow below the ground, measured from equilibrium
+    var arrowY = groundY + 30;
+    g.strokeStyle = INK; g.fillStyle = INK; g.lineWidth = 0.9;
+    line(g, x0, arrowY - 7, x0, arrowY + 7);
+    if (Math.abs(xc - x0) > 5) { g.lineWidth = 1.2; line(g, x0, arrowY, xc, arrowY); arrowHead(g, xc, arrowY, xc > x0 ? 0 : Math.PI, 9, 3.5); }
+    funcLabel(g, "u", "", Math.max(x0, xc) + 8, arrowY + 5, 17);
+
+    // ground acceleration arrow (base excitation): length proportional to the current ground acceleration
+    if (mode !== "free") {
+      var gx = wallX + 70, gl = run && run.agmax ? 46 * cur.ag / run.agmax : 0;
+      g.strokeStyle = INK; g.lineWidth = 0.9; line(g, gx, arrowY - 7, gx, arrowY + 7);
+      if (Math.abs(gl) > 3) { g.lineWidth = 1.2; line(g, gx, arrowY, gx + gl, arrowY); arrowHead(g, gx + gl, arrowY, gl > 0 ? 0 : Math.PI, 8, 3.2); }
+      g.fillStyle = INK; mathText(g, "ü", "g", gx + 52, arrowY + 5, 17, "left");
+    }
+
+    // spring (upper) and dashpot (lower) attach to the left face of the mass
+    var x1 = wallX, x2 = xc - bw / 2, by = groundY - 2 * rr - bh;
+    var yS = by + bh * 0.27, yD = by + bh * 0.76;
+    var lead = 14, len = Math.max(24, x2 - x1 - 2 * lead);
+    g.strokeStyle = INK; g.lineWidth = 1.3 + 1.2 * Math.sqrt((K - 0.1 * K0) / (4.9 * K0));   // stiffer spring, heavier line
+    var nz = 10, amp = 9;
+    g.beginPath(); g.moveTo(x1, yS); g.lineTo(x1 + lead, yS);
+    for (var i = 0; i < nz; i++) { g.lineTo(x1 + lead + len * (i + 0.25) / nz, yS - amp); g.lineTo(x1 + lead + len * (i + 0.75) / nz, yS + amp); }
+    g.lineTo(x1 + lead + len, yS); g.lineTo(x2, yS); g.stroke();
+    g.fillStyle = INK; mathText(g, "k", "", x1 + (x2 - x1) * 0.5, yS - 15, 17, "center");
+
+    // dashpot: open cylinder fixed to the wall, piston fixed to the mass (grey when there is no damping)
+    g.strokeStyle = zeta > 0 ? INK : FAINT; g.fillStyle = zeta > 0 ? INK : FAINT; g.lineWidth = 1.3;
+    var x2eq = x0 - bw / 2, xa = x1 + 22, Lc = Math.max(40, (x2eq - xa) * 0.55), xb = xa + Lc, ch = 16;
+    var rodLen = x2eq - (xa + Lc * 0.5), xp = Math.min(xb - 4, Math.max(xa + 5, x2 - rodLen));
+    line(g, x1, yD, xa, yD);
+    g.beginPath(); g.moveTo(xb, yD - ch / 2); g.lineTo(xa, yD - ch / 2); g.lineTo(xa, yD + ch / 2); g.lineTo(xb, yD + ch / 2); g.stroke();
+    g.lineWidth = 2; line(g, xp, yD - ch / 2 + 3, xp, yD + ch / 2 - 3);
+    g.lineWidth = 1.3; line(g, xp, yD, x2, yD);
+    mathText(g, "c", "", xa + Lc * 0.5, yD - ch / 2 - 6, 17, "center");
+
+    // mass on two rollers
+    g.strokeStyle = INK; g.fillStyle = "#fff"; g.lineWidth = 1.5;
+    g.beginPath(); g.rect(xc - bw / 2, by, bw, bh); g.fill(); g.stroke();
+    g.fillStyle = INK; g.textBaseline = "middle"; mathText(g, "m", "", xc, by + bh / 2, Math.round(bh * 0.38), "center"); g.textBaseline = "alphabetic";
+    g.lineWidth = 1.2; g.fillStyle = "#fff";
+    [xc - bw * 0.27, xc + bw * 0.27].forEach(function (wx) { g.beginPath(); g.arc(wx, groundY - rr, rr, 0, 2 * Math.PI); g.fill(); g.stroke(); });
+
+    var Td = p.z < 1 ? 2 * Math.PI / p.wd : NaN;
+    $("readout").innerHTML = '<span class="mi">T</span><sub class="mi">n</sub> = ' + p.Tn.toFixed(3) + " s<br>" +
+      '<span class="mi">ζ</span> = ' + (p.z * 100).toFixed(1) + " %<br>" +
+      '<span class="mi">T</span><sub class="mi">D</sub> = ' + (isFinite(Td) ? Td.toFixed(3) + " s" : "—");
+  }
+
+  // ---- Time-history plots: response divided by its peak; axes with arrow tips ----
+  function niceStep(span) {
+    var raw = span / 6, p = Math.pow(10, Math.floor(Math.log10(raw))), m = raw / p;
+    return (m < 1.5 ? 1 : m < 3 ? 2 : m < 7 ? 5 : 10) * p;
+  }
+  function drawPlot(c, key) {
+    var s = fit(c), g = s.g, W = s.w, H = s.h;
+    g.clearRect(0, 0, W, H); g.lineCap = "round"; g.lineJoin = "round";
+    var L = 40, Rm = 34, T = 16, B = 26, pw = W - L - Rm, ph = H - T - B;
+    var eq = run ? run.mode === "eq" : mode === "eq";
+    var xmax = run ? run.xmax : (eq ? 30 : NPER);
+    var X = function (x) { return L + x / xmax * pw; };
+    var Y = function (y) { return T + (1.12 - y) / 2.24 * ph; };
+    g.strokeStyle = INK; g.fillStyle = INK; g.lineWidth = 1;
+    line(g, L, T + ph, L, T - 4); arrowHead(g, L, T - 8, -Math.PI / 2, 7, 3);
+    line(g, L, Y(0), L + pw + 10, Y(0)); arrowHead(g, L + pw + 14, Y(0), 0, 7, 3);
+    g.font = "12px " + MAIN; g.textAlign = "right";
+    [-1, -0.5, 0, 0.5, 1].forEach(function (y) {
+      line(g, L - 4, Y(y), L, Y(y));
+      g.fillText(y === 0 ? "0" : (y < 0 ? "−" : "") + String(Math.abs(y)), L - 7, Y(y) + 4);
+    });
+    g.strokeStyle = FAINT; g.setLineDash([3, 4]); line(g, L + 1, Y(1), L + pw, Y(1)); line(g, L + 1, Y(-1), L + pw, Y(-1)); g.setLineDash([]);
+    g.strokeStyle = INK; g.textAlign = "center";
+    var step = eq ? niceStep(xmax) : 1;
+    for (var x = step, k = 1; x <= xmax + 1e-9; x += step, k++) {
+      line(g, X(x), Y(0) - 3, X(x), Y(0) + 3);
+      if (eq || k % 2 === 0 || pw > 260) g.fillText(String(+x.toFixed(2)), X(x), Y(0) + 16);
+    }
+    var lx = L + pw + 2, ly = Y(0) - 8;
+    if (eq) { mathText(g, "t", "", lx - 6, ly, 14, "left"); g.font = "12px " + MAIN; g.textAlign = "left"; g.fillText("(s)", lx + 2, ly); }
+    else { mathText(g, "t", "", lx - 10, ly, 14, "left"); g.font = "14px " + MAIN; g.textAlign = "left"; g.fillText("/", lx - 4, ly); mathText(g, "T", "n", lx + 1, ly, 14, "left"); }
+    if (!run) {
+      g.fillStyle = GREY; g.font = "italic 13px " + MAIN; g.textAlign = "center";
+      g.fillText("Press Run", L + pw / 2, T + ph * 0.3); return;
+    }
+    var arr = run[key], pk = run.pk[key] || 1, N = arr.length - 1, n = Math.min(N, Math.floor(prog * N));
+    g.save(); g.beginPath(); g.rect(L + 1, T - 4, pw + 4, ph + 8); g.clip();
+    // ground acceleration (grey) on the total-acceleration plot, on the same scale
+    if (key === "a" && run.ag) {
+      g.strokeStyle = "#b5b5b5"; g.lineWidth = 1; g.beginPath();
+      for (var j = 0; j <= n; j++) { var yy = Y(run.ag[j] / pk); if (j) g.lineTo(X(run.x[j]), yy); else g.moveTo(X(run.x[j]), yy); }
+      g.stroke();
+    }
+    // decay envelope of the free-vibration displacement (dashed) when damped
+    if (key === "u" && run.mode === "free" && run.p.z > 0 && run.p.z < 1 && pk > 0) {
+      var p = run.p, amp = Math.hypot(p.uo, (p.vo + p.z * p.wn * p.uo) / p.wd) / pk, tauNow = run.x[n];
+      g.strokeStyle = GREY; g.lineWidth = 0.9; g.setLineDash([4, 4]);
+      [1, -1].forEach(function (sg) {
+        g.beginPath();
+        for (var e = 0; e <= 120; e++) { var tt = tauNow * e / 120, py = Y(sg * amp * Math.exp(-p.z * 2 * Math.PI * tt)); if (e) g.lineTo(X(tt), py); else g.moveTo(X(tt), py); }
+        g.stroke();
+      });
+      g.setLineDash([]);
+    }
+    g.strokeStyle = INK; g.lineWidth = eq ? 1.1 : 1.7; g.beginPath();
+    for (var q = 0; q <= n; q++) { var px = X(run.x[q]), py2 = Y(pk ? arr[q] / pk : 0); if (q) g.lineTo(px, py2); else g.moveTo(px, py2); }
+    g.stroke(); g.restore();
+    var ip = run.ipk[key];
+    if (pk && ip <= n) { g.lineWidth = 1.2; g.fillStyle = "#fff"; g.beginPath(); g.arc(X(run.x[ip]), Y(arr[ip] / pk), 4.5, 0, 2 * Math.PI); g.fill(); g.stroke(); }
+    g.fillStyle = INK; g.beginPath(); g.arc(X(run.x[n]), Y(pk ? arr[n] / pk : 0), 3, 0, 2 * Math.PI); g.fill();
+  }
+
+  // ---- Dragging the mass sets the initial displacement (free vibration only) ----
+  function toInches(clientX) { var r = stage.getBoundingClientRect(); return (clientX - r.left - geo.x0) / geo.scale; }
+  stage.addEventListener("pointerdown", function (e) { if (mode !== "free") return; drag = true; stage.classList.add("dragging"); stage.setPointerCapture(e.pointerId); onDrag(e); });
+  stage.addEventListener("pointermove", function (e) { if (drag) onDrag(e); });
+  function endDrag() { if (drag) { drag = false; stage.classList.remove("dragging"); } }
+  stage.addEventListener("pointerup", endDrag); stage.addEventListener("pointercancel", endDrag);
+  function onDrag(e) { sldispo.value = Math.round(Math.min(10, Math.max(0, toInches(e.clientX)))); showValues(); clearRun(); }
+
+  // ---- Main loop: plays the run once, then stops ----
+  var last = null;
+  function frame(now) {
+    var dt = last === null ? 0 : Math.min(0.05, (now - last) / 1000); last = now;
+    if (run && playing) {
+      prog = Math.min(1, prog + dt / run.play);
+      if (prog >= 1) playing = false;
+      var i = Math.min(run.u.length - 1, Math.floor(prog * (run.u.length - 1)));
+      cur = { u: run.u[i], ag: run.ag ? run.ag[i] : 0 };
+      if (run.ag && !run.agmax) run.agmax = run.ag.reduce(function (m, x) { return Math.max(m, Math.abs(x)); }, 0) || 1;
+    }
+    drawStage();
+    drawPlot($("pu"), "u"); drawPlot($("pv"), "v"); drawPlot($("pa"), "a");
+    // Note shown only while a run plays slower or faster than real time
+    var sp = run ? run.real / run.play : 1;
+    $("hint").textContent = run && playing && Math.abs(sp - 1) > 1e-6
+      ? "Playing at " + sp.toFixed(2).replace(/\.?0+$/, "") + "× real time." : " ";
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // ---- Tell the parent page how tall this demo is (for the iframe height) ----
+  function postHeight() {
+    try { parent.postMessage({ type: "trg-embed-height", height: Math.ceil(document.querySelector(".wrap").getBoundingClientRect().height) + 4 }, "*"); } catch (e) {}
+  }
+  window.addEventListener("resize", postHeight);
+  if (window.ResizeObserver) new ResizeObserver(postHeight).observe(document.querySelector(".wrap"));
+})();
+</script>
+</body>
+</html>

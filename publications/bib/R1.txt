@@ -1,0 +1,7 @@
+@techreport{Tsampras2012R1,
+  author = {Georgios Tsampras},
+  title = {Parametric Study of Inelastic Response in Planar Steel Moment Resisting Frames},
+  institution = {M.Sc. Thesis, Department of Civil Engineering, University of Patras, Greece [Greek]},
+  year = {2012},
+  url = {http://hdl.handle.net/10889/4963}
+}

@@ -1,0 +1,7 @@
+@inproceedings{Tsampras2024C31,
+  author = {Georgios Tsampras and Paolo Bocchini and C. Franco Mayorga and Sena Mursel},
+  title = {Resilience-Based Design of Buildings with Accelerated Post-Earthquake Functional Recovery},
+  booktitle = {2024 DRRG Symposium, Presentation},
+  year = {2024},
+  url = {https://cdnapisec.kaltura.com/index.php/extwidget/preview/partner_id/684682/uiconf_id/33598632/entry_id/1_82spotka/embed/dynamic#t=1:41:11}
+}

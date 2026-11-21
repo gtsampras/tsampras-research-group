@@ -1,0 +1,6 @@
+@inproceedings{Mursel2026C45,
+  author = {Sena Mursel and C. Franco Mayorga and Georgios Tsampras and Paolo Bocchini},
+  title = {Probabilistic Functional Recovery Assessment of RC Wall Buildings with Force-Limiting Connections},
+  booktitle = {Engineering Mechanics Institute Conference 2026, Colorado, USA},
+  year = {2026}
+}

@@ -1,0 +1,7 @@
+@inproceedings{Tsampras2015C3,
+  author = {Georgios Tsampras and Richard Sause and Robert B. Fleischman and José I. Restrepo},
+  title = {An earthquake-resistant building system to reduce floor accelerations},
+  booktitle = {NZSEE15 Conference, Rotorua, New Zealand},
+  year = {2015},
+  url = {http://www.nzsee.org.nz/db/2015/Papers/O-48_Tsampras.pdf}
+}

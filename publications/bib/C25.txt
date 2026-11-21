@@ -1,0 +1,6 @@
+@inproceedings{Tsampras2024C25,
+  author = {Georgios Tsampras and Richard Sause},
+  title = {Practical design of force-limiting connections for buildings with reduced higher-mode responses},
+  booktitle = {18th World Conference on Earthquake Engineering, Milan, Italy},
+  year = {2024}
+}

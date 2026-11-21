@@ -1,0 +1,6 @@
+@inproceedings{Lee2024C30,
+  author = {Kyoungyeon Lee and Georgios Tsampras},
+  title = {Seismic response of core wall building with friction-based force-limiting connections},
+  booktitle = {18th World Conference on Earthquake Engineering, Milan, Italy},
+  year = {2024}
+}

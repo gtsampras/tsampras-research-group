@@ -1,0 +1,6 @@
+@inproceedings{Lee2022C15,
+  author = {Kyoungyeon Lee and Kaixin Chen and Georgios Tsampras},
+  title = {Seismic Response of Core Wall Building with Friction-Based Force-Limiting Connections},
+  booktitle = {3rd European Conference on Earthquake Engineering \& Seismology, Bucharest, Romania},
+  year = {2022}
+}

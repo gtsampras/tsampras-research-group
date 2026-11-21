@@ -1,0 +1,6 @@
+@inproceedings{Baghdasaryan2024C33,
+  author = {Ernest Baghdasaryan and Georgios Tsampras and Kaixin Chen},
+  title = {Development of a prototype lightweight 3D-printed buckling restrained brace},
+  booktitle = {Guided Engineering Apprenticeship in Research Program Presentations, San Diego, CA},
+  year = {2024}
+}

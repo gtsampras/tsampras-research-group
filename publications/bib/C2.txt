@@ -1,0 +1,6 @@
+@inproceedings{Tsampras2014C2,
+  author = {Georgios Tsampras and Richard Sause and Robert B. Fleischman and José I. Restrepo},
+  title = {Experimental validation of an innovative earthquake-resistant building system to control floor accelerations and limit inertia forces},
+  booktitle = {10th U.S. National Conference on Earthquake Engineering, Anchorage, AK, USA},
+  year = {2014}
+}

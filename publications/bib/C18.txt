@@ -1,0 +1,6 @@
+@inproceedings{Chou2022C18,
+  author = {Chung-Che Chou and Alvaro Córdova and Huang-Zuo Lin and Jian-Ming Chen and Yen-Hsun Chou and Shu-Hsien Chao and Shih-Ho Chao and Georgios Tsampras and Chia-Ming Uang and Hsin-Yang Chung and Hsuan-Teh Hu and Chin-Hsiung Loh},
+  title = {Analysis and test plan for a three-story steel BRBF with a sliding slab to reduce seismic lateral force in shake table tests},
+  booktitle = {8th Asia Conference on Earthquake Engineering, Taipei, Taiwan},
+  year = {2022}
+}

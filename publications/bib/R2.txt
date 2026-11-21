@@ -1,0 +1,7 @@
+@dataset{Fleischman2014halfscale,
+  author    = {Fleischman, Robert and Restrepo, Jose and Sause, Richard and Zhang, Dichuan and Tsampras, Georgios and Zhang, Zhi and Nema, Arpit and Shakya, Ulina},
+  title     = {Half scale shake table test of a 4 story reinforced concrete building with eccentric shear walls},
+  publisher = {DesignSafe-CI},
+  year      = {2014},
+  doi       = {10.4231/D39W0908G}
+}

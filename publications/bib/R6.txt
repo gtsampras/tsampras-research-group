@@ -1,0 +1,7 @@
+@techreport{Chen2026R6,
+  author = {Kaixin Chen},
+  title = {Friction-based structural components for earthquake-resistant buildings},
+  institution = {PhD Thesis, University of California San Diego},
+  year = {2026},
+  url = {https://www.proquest.com/dissertations-theses/friction-based-structural-components-earthquake/docview/3385606128/se-2?accountid=14524}
+}

@@ -1,0 +1,8 @@
+@dataset{Mayorga2025data,
+  author    = {Mayorga, C. Franco and Tsampras, Georgios},
+  title     = {Validation of seismic design provisions for diaphragms and assessment of higher-mode responses on earthquake-resistant buildings},
+  publisher = {DesignSafe-CI},
+  year      = {2025},
+  doi       = {10.17603/ds2-jnf5-e909},
+  keywords  = {advisee:Mayorga}
+}

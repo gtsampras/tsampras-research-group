@@ -1,0 +1,7 @@
+@patent{Tsampras2026P1,
+  author = {Georgios Tsampras and Kaixin Chen},
+  title = {Friction devices for energy dissipation, U.S},
+  number = {Patent US12612797B2},
+  year = {2026},
+  url = {https://patents.google.com/patent/US12612797B2/en}
+}

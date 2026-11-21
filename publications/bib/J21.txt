@@ -1,0 +1,7 @@
+@article{Lee2026J21,
+  author = {Kyoungyeon Lee and Georgios Tsampras},
+  title = {Suspended-floor Building Systems: Historical Overview and State-of-the-art Review},
+  journal = {Engineering Structures},
+  year = {2026},
+  note = {Under review}
+}

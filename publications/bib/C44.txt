@@ -1,0 +1,6 @@
+@inproceedings{Kang2026C44,
+  author = {Aaron Kang and Kaixin Chen and Georgios Tsampras},
+  title = {3D-Printed Viscoelastic Force-Limiting Connection for Seismic Protection of Nonstructural Components},
+  booktitle = {University of California San Diego Undergraduate Engineering Research Symposium, San Diego, CA},
+  year = {2026}
+}

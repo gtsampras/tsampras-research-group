@@ -1,0 +1,7 @@
+@inproceedings{Zhang2018C8,
+  author = {Zhi Zhang and Arpit Nema and Gabriele Guerrini and Ulina Shakya and Georgios Tsampras and Robert B. Fleischman and José I. Restrepo and Richard Sause and Dichuan Zhang and Joseph Maffei and David Mar and Giorgio Monti},
+  title = {An inertial force-limiting floor anchorage system for low-damage building structures},
+  booktitle = {11th National Conference on Earthquake Engineering, CA, USA},
+  year = {2018},
+  url = {https://11ncee.org/images/program/papers/11NCEE-000986.pdf}
+}

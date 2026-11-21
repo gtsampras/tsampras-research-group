@@ -1,0 +1,8 @@
+@article{Chen2026lowcost,
+  author  = {Chen, Kaixin and Tsampras, Georgios and Chou, Chung-Che and Li, Huang-Zuo and Wu, Chi-Jeng and C{\'o}rdova, Alvaro and Uang, Chia-Ming and Chao, Shih-Ho},
+  title   = {Low-cost friction-based force-limiting connection with reduced sensitivity to machining tolerances and accelerated repairability},
+  journal = {Earthquake Engineering \& Structural Dynamics},
+  year    = {2026},
+  doi     = {10.1002/eqe.70121},
+  keywords = {advisee:Chen}
+}

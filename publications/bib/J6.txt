@@ -1,0 +1,7 @@
+@article{VanDenEinde2021nheri,
+  author  = {Van Den Einde, Lelli and Conte, Joel P. and Restrepo, Jos{\'e} I. and Bustamante, Ricardo and Halvorson, Marty and Hutchinson, Tara C. and Lai, Chin-Ta and Lotfizadeh, Koorosh and Luco, J. Enrique and Morrison, Machel L. and Mosqueda, Gilberto and Nemeth, Mike and Ozcelik, Ozgur and Restrepo, Sebastian and Rodriguez, Andr{\'e}s and Shing, P. Benson and Thoen, Brad and Tsampras, Georgios},
+  title   = {NHERI@UC San Diego 6-DOF large high-performance outdoor shake table facility},
+  journal = {Frontiers in Built Environment},
+  year    = {2021},
+  doi     = {10.3389/fbuil.2020.580333}
+}

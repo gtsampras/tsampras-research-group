@@ -1,0 +1,6 @@
+@inproceedings{Frakt2025C39,
+  author = {Rhowen Frakt and Georgios Tsampras and Kaixin Chen},
+  title = {3D Printed Modular and Reusable Formwork for Precast Concrete: Proof-of-Concept},
+  booktitle = {Guided Engineering Apprenticeship in Research Program Presentations, San Diego, CA},
+  year = {2025}
+}

@@ -1,0 +1,6 @@
+@inproceedings{Mayorga2024C22,
+  author = {C. Franco Mayorga and Georgios Tsampras},
+  title = {Modeling effects and uncertainty propagation in reinforced concrete wall buildings with force-limiting connections},
+  booktitle = {NHERI Computational Symposium, Los Angeles, CA, USA},
+  year = {2024}
+}

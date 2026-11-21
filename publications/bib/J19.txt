@@ -1,0 +1,7 @@
+@article{Davey2026J19,
+  author = {Andrew S. Davey and Falk Feddersen and Georgios Tsampras},
+  title = {A STereo imaging system for Overturning wave KinEmatiCs and dynAMics (STOKECAM)},
+  journal = {Coastal Engineering Journal},
+  year = {2026},
+  doi = {10.1080/21664250.2026.2762549}
+}

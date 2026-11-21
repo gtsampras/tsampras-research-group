@@ -1,0 +1,7 @@
+@article{Cordova2025slidingslab,
+  author  = {C{\'o}rdova, Alvaro and Chou, Chung-Che and Wu, Chi-Jeng and Tsampras, Georgios and Uang, Chia-Ming and Chao, Shih-Ho},
+  title   = {Modeling and response of a three-story steel building with sliding slabs in earthquake motions},
+  journal = {Earthquake Engineering \& Structural Dynamics},
+  year    = {2025},
+  doi     = {10.1002/eqe.4300}
+}

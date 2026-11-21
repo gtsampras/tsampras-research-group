@@ -1,0 +1,9 @@
+@phdthesis{Lee2022msthesis,
+  author  = {Lee, Kyoungyeon},
+  title   = {Seismic response of eighteen-story core wall building with force-limiting connections and low-damage coupling beams},
+  school  = {University of California San Diego},
+  type    = {MS thesis},
+  year    = {2022},
+  url     = {https://escholarship.org/uc/item/2gk8101w},
+  keywords = {advisee:Lee}
+}

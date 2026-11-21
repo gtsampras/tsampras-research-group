@@ -1,0 +1,8 @@
+@article{Tsampras2025osb,
+  author  = {Tsampras, Georgios and Zabel, Richard and Chen, Kaixin},
+  title   = {Experimental investigation of edge distance effects on uplift response in OSB sheathing-to-framing nailed connections using digital image correlation},
+  journal = {Journal of Building Engineering},
+  year    = {2025},
+  doi     = {10.1016/j.jobe.2025.113348},
+  keywords = {advisee:Chen}
+}

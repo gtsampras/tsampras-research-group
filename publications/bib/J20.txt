@@ -1,0 +1,7 @@
+@article{Pick2026J20,
+  author = {Kanoa Pick and Kaden Quinn and Nicholas Cirrito and Ashton Domi and Georgios Tsampras and Falk Feddersen},
+  title = {BathyBoard: A Surfboard-Based Platform for Measuring Surf Zone Bathymetry},
+  journal = {ASCE Journal of Surveying Engineering, 153(1), 04026014},
+  year = {2026},
+  doi = {10.1061/JSUED2.SUENG-1758}
+}

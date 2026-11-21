@@ -1,0 +1,6 @@
+@inproceedings{Mayorga2025C37,
+  author = {C. Franco Mayorga and Sena Mursel and Georgios Tsampras and Paolo Bocchini},
+  title = {Resilience-based design of buildings with accelerated post-earthquake functional recovery},
+  booktitle = {2025 Disaster Resilience Research Grant Symposium, Virtual},
+  year = {2025}
+}

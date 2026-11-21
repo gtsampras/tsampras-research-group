@@ -1,0 +1,9 @@
+@article{Chen2025composites,
+  author  = {Chen, Kaixin and Tsampras, Georgios and Cheruvalath, Shivaglal and Thundathil, Mary},
+  title   = {Experimental characterization of mechanical and tribological properties of composite materials for friction-based force-limiting structural components},
+  journal = {Composites Part B: Engineering},
+  year    = {2025},
+  pages   = {112472},
+  doi     = {10.1016/j.compositesb.2025.112472},
+  keywords = {advisee:Chen}
+}

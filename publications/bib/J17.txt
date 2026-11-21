@@ -1,0 +1,7 @@
+@article{Tsampras2025rocking,
+  author  = {Tsampras, Georgios and Sause, Richard},
+  title   = {Reducing the magnitude and variability of seismic-induced acceleration and force responses in steel buildings with controlled rocking base mechanism and force-limiting connections},
+  journal = {Resilient Cities and Structures},
+  year    = {2025},
+  doi     = {10.1016/j.rcns.2025.12.004}
+}

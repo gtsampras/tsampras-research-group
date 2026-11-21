@@ -1,0 +1,7 @@
+@article{Chou2024boxcolumn,
+  author  = {Chou, Chung-Che and Lin, Huang-Zuo and C{\'o}rdova, Alvaro and Chen, Jian-Ming and Chou, Yen-Hsun and Chao, Shu-Hsien and Chao, Shih-Ho and Tsampras, Georgios and Uang, Chia-Ming and Chung, Hsin-Yang and Loh, Chin-Hsiung and Hu, Hsuan-Teh},
+  title   = {Earthquake simulator testing of a three-story steel building for evaluating built-up box column performance and effect of sliding slab},
+  journal = {Earthquake Engineering \& Structural Dynamics},
+  year    = {2024},
+  doi     = {10.1002/eqe.4130}
+}

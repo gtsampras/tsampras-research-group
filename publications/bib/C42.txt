@@ -1,0 +1,6 @@
+@inproceedings{Davey2026C42,
+  author = {Andrew S. Davey and Georgios Tsampras and Falk Feddersen},
+  title = {Mechanical characterization of thermoplastic composites for 3D-printed coastal structures},
+  booktitle = {39th International Conference on Coastal Engineering, Galveston, TX, USA},
+  year = {2026}
+}

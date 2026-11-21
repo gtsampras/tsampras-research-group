@@ -1,0 +1,7 @@
+@inproceedings{Tsampras2015C6,
+  author = {Georgios Tsampras and Richard Sause and Robert B. Fleischman and José I. Restrepo and Dichuan Zhang},
+  title = {Deformable connection for earthquake-resistant building systems},
+  booktitle = {JAEE International Symposium on Earthquake Engineering, Tokyo, Japan},
+  year = {2015},
+  url = {https://www.researchgate.net/publication/299534984_Deformable_connection_for_eartquake-resistant_building_systems}
+}

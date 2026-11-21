@@ -1,0 +1,6 @@
+@inproceedings{Chou2026C43,
+  author = {Chung-Che Chou and Chi-Jeng Wu and Li-Yu Huang and Alvaro Córdova and Huang-Zuo Lin and Shu-Hsien Chao and Georgios Tsampras and Chia-Ming Uang and Shih-Ho Chao and Hsin-Yang Chung},
+  title = {Shaking Table Tests of a Novel Three-Story Re-Centering Steel Braced Frame with Sliding Slab for Earthquake Force Reduction},
+  booktitle = {13th National Conference on Earthquake Engineering, Portland, Oregon},
+  year = {2026}
+}

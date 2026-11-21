@@ -1,0 +1,6 @@
+@inproceedings{Tsampras2022C11,
+  author = {Georgios Tsampras and Richard Sause},
+  title = {Design of Force-Limiting Deformable Connections in High-Performance Earthquake-Resilient Buildings},
+  booktitle = {Engineering Mechanics Institute Conference, Baltimore, Maryland, USA},
+  year = {2022}
+}
